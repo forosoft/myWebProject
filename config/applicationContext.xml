@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <!-- 类似于财务部门一样，类就是钱，所有需要类的实例都由srping去管理 -->
+    <bean id="myIndexAction" class="com.xyf.action.IndexAction" scope="prototype">
+        <!-- setIs(myIndexService) -->
+        <property name="is" ref="myIndexService"/>
+    </bean>
+    <bean id="myIndexService" class="com.xyf.service.impl.IndexServiceImpl" scope="prototype">
+        <property name="id" ref="myIndexDao"/>
+    </bean>
+    <bean id="myIndexDao" class="com.xyf.dao.impl.IndexDaoImpl" scope="prototype">
+        <!-- 把sessionFactory 注入给IndexDao -->
+        <property name="sessionFactory" ref="sessionFactory" />
+    </bean>
+    <!-- 添加sessionFactory bane ，注意，该类是Spring提供的 -->
+    <bean id="sessionFactory" class="org.springframework.orm.hibernate5.LocalSessionFactoryBean" scope="prototype">
+    <!-- 注入Hibernate 配置文件路径,前面要加上  classpath:-->
+    <property name="configLocation" value="classpath:hibernate.cfg.xml"/>
+    </bean>
+
+</beans>

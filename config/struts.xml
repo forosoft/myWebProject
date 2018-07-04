@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE struts PUBLIC
+        "-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
+        "http://struts.apache.org/dtds/struts-2.3.dtd">
+
+<struts>
+    <!-- 告知Struts2运行时使用Spring来创建对象 -->
+    <constant name="struts.objectFactory" value="org.apache.struts2.spring.StrutsSpringObjectFactory" />
+    <!-- 第1步：先定义一个包 -->
+    <package name="mypck001" extends="struts-default">
+        <!-- 第2步：定义一个action，配置跳转信息 name 类似于Servlet @WebServlet("/IndexServlet")
+        -->
+        <action name="Index" class="myIndexAction">
+            <result name="success">/WEB-INF/jsp/index.jsp</result>
+        </action>
+    </package>
+</struts>
